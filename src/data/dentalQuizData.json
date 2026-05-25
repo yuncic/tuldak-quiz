@@ -1,0 +1,80 @@
+{
+  "quizzes": [
+    {
+      "id": 1,
+      "question_text": "이것의 이름은?",
+      "question_image": "/buddy.png",
+      "options": ["버디버디", "테일즈러너", "신속의 장화", "카트라이더"],
+      "correct_answer": 1,
+      "custom_message": "해당 아이콘은 2000~2012년까지 서비스를 해왔던 메신저,'버디버디'로, 한 때 한국에서 3번째로 많이 사용하는 메신저였다.",
+      "rates": { "10대": 45, "20대": 85, "30대": 95, "40대": 75 },
+      "weight": 3
+    },
+    {
+      "id": 2,
+      "question_text": "무한도전의 1기 시절 이름은?",
+      "question_image": "/challenge.png",
+      "options": ["무한도전", "무모한도전", "무리한도전", "유한도전"],
+      "correct_answer": 2,
+      "custom_message": "무모한도전은 무한도전의 1기 시절 이름이다.",
+      "rates": { "10대": 30, "20대": 60, "30대": 95, "40대": 90 },
+      "weight": 2
+    },
+    {
+      "id": 3,
+      "question_text": "이 게임의 이름은?",
+      "question_image": "/dad_son.png",
+      "options": ["형과 나", "동생과 나", "삼촌과 나", "아빠와 나"],
+      "correct_answer": 4,
+      "custom_message": "'아빠와 나'는 '주전자닷컴','점심먹고노라라' 등과 같은 플래시게임 사이트에서 당시 초중고학생들이 즐겨하던 게임이다.",
+      "rates": { "10대": 20, "20대": 80, "30대": 90, "40대": 30 },
+      "weight": 1
+    },
+    {
+      "id": 4,
+      "question_text": "싸이월드에서 사용하는 화폐는?",
+      "question_image": "/cyworld.png",
+      "options": ["솔방울", "아몬드", "도토리", "고구마"],
+      "correct_answer": 3,
+      "custom_message": "싸이월드에서 사용했던 화폐는 '도토리'이다.",
+      "rates": { "10대": 25, "20대": 75, "30대": 90, "40대": 90 },
+      "weight": 2
+    },
+    {
+      "id": 5,
+      "question_text": "이 유닛의 이름은?",
+      "question_image": "/scv.jpg",
+      "options": ["scv", "마린", "고스트", "csv"],
+      "correct_answer": 1,
+      "custom_message": "scv는 스타크래프트의 종족인 테란의 건설로봇이다.",
+      "rates": { "10대": 30, "20대": 80, "30대": 90, "40대": 95 },
+      "weight": 3
+    },
+    {
+      "id": 6,
+      "question_text": "이따 5시에 0000에서 불이 날거에요.",
+      "question_image": "/pie.png",
+      "options": ["붕어빵집", "호떡집", "카페", "빵집"],
+      "correct_answer": 2,
+      "custom_message": "2010년~2011년에 방송한 EBS의 드라마 '미래를보는소년'에서의 명장면 중 하나이다.",
+      "rates": { "10대": 15, "20대": 90, "30대": 70, "40대": 50 },
+      "weight": 1
+    },
+    {
+      "id": 7,
+      "question_text": "이것의 용도는?",
+      "question_image": "/iliver.jpg",
+      "options": ["게임기", "미니노트북", "전자사전", "음악플레이어"],
+      "correct_answer": 3,
+      "custom_message": "당시 학부모님의 학습용 선물로 많이 채택되었던 전자사전이다.(내장 게임도 있었다)",
+      "rates": { "10대": 65, "20대": 80, "30대": 90, "40대": 85 },
+      "weight": 3
+    }
+  ],
+  "resultRanges": [
+    { "type": "유치", "min": 0, "max": 10, "message": "당신은 아직 젊은 감각을 가지고 있네요!" },
+    { "type": "건치", "min": 11, "max": 20, "message": "건강한 중년의 감각을 가지고 계시네요." },
+    { "type": "임플란트", "min": 21, "max": 30, "message": "경험이 풍부하신 분이시네요." },
+    { "type": "틀니", "min": 31, "max": 40, "message": "완전한 어른이 되셨네요!" }
+  ]
+}
