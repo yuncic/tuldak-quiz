@@ -1,7 +1,7 @@
-import styled from '@emotion/styled';
-import type { Quiz, QuizState } from '../types';
-import ResultOverlay from './ResultOverlay';
-import OptionBtnContainer from './OptionBtnContainer';
+import styled from "@emotion/styled";
+import type { Quiz, QuizState } from "../types";
+import ResultOverlay from "./ResultOverlay";
+import OptionBtnContainer from "./OptionBtnContainer";
 
 interface Props {
   quiz: Quiz;
@@ -14,10 +14,10 @@ interface Props {
 }
 
 const getOffset = (diff: number) => {
-  if (diff === 0) return 'translateX(-50%)';
-  if (diff === -1) return 'translateX(calc(-50% - 120%))';
-  if (diff === 1) return 'translateX(calc(-50% + 120%))';
-  return diff < 0 ? 'translateX(-250%)' : 'translateX(250%)';
+  if (diff === 0) return "translateX(-50%)";
+  if (diff === -1) return "translateX(calc(-50% - 120%))";
+  if (diff === 1) return "translateX(calc(-50% + 120%))";
+  return diff < 0 ? "translateX(-250%)" : "translateX(250%)";
 };
 
 const getOpacity = (diff: number) => {
@@ -34,7 +34,7 @@ const Wrapper = styled.div<{ diff: number }>`
   transform: ${({ diff }) => getOffset(diff)};
   opacity: ${({ diff }) => getOpacity(diff)};
   z-index: ${({ diff }) => (diff === 0 ? 2 : 1)};
-  pointer-events: ${({ diff }) => (diff === 0 ? 'auto' : 'none')};
+  pointer-events: ${({ diff }) => (diff === 0 ? "auto" : "none")};
 
   @media (min-width: 768px) {
     width: 960px;
@@ -42,17 +42,34 @@ const Wrapper = styled.div<{ diff: number }>`
 `;
 
 const CardBody = styled.div`
-  background: #FCF8F5;
+  background: #fcf8f5;
   border-radius: 56px 56px 28px 28px;
   overflow: hidden;
   position: relative;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.1), 0 8px 15px rgba(0,0,0,0.15), 0 12px 30px rgba(0,0,0,0.2);
+  box-shadow:
+    0 4px 6px rgba(0, 0, 0, 0.1),
+    0 8px 15px rgba(0, 0, 0, 0.15),
+    0 12px 30px rgba(0, 0, 0, 0.2);
   display: flex;
   flex-direction: column;
   align-items: center;
 
   @media (min-width: 768px) {
     border-radius: 80px;
+  }
+`;
+
+const TopSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 20px;
+
+  @media (min-width: 768px) {
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
   }
 `;
 
@@ -64,12 +81,12 @@ const QBadge = styled.div<{ answered: boolean; correct: boolean | null }>`
   height: 72px;
   border-radius: 50%;
   background: ${({ answered, correct }) =>
-    !answered ? '#FFD600' : correct ? '#FFD600' : '#FF4E00'};
+    !answered ? "#FFD600" : correct ? "#FFD600" : "#FF4E00"};
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 11;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
 
   @media (min-width: 768px) {
     width: 108px;
@@ -83,7 +100,7 @@ const BadgeText = styled.span`
   color: white;
   font-size: 28px;
   font-weight: 900;
-  font-family: 'SUIT-ExtraBold', sans-serif;
+  font-family: "SUIT-ExtraBold", sans-serif;
 
   @media (min-width: 768px) {
     font-size: 44px;
@@ -93,14 +110,15 @@ const BadgeText = styled.span`
 const QuestionText = styled.p`
   width: 298px;
   margin: 54px 0 25px;
-  color: #0063B2;
-  font-family: 'SUIT-ExtraBold', sans-serif;
-  font-size: 24px;
+  color: #0063b2;
+  font-family: "SUIT-ExtraBold", sans-serif;
+  font-size: 16px;
   line-height: 32px;
   text-align: center;
 
   @media (min-width: 768px) {
-    width: 464px;
+    flex: 1;
+    width: auto;
     font-size: 40px;
     line-height: 50px;
     text-align: left;
@@ -111,7 +129,7 @@ const QuestionText = styled.p`
 const ImageBox = styled.div`
   width: 318px;
   height: 252px;
-  border: 2px solid #0063B2;
+  border: 2px solid #0063b2;
   border-radius: 46px;
   overflow: hidden;
   display: flex;
@@ -127,34 +145,47 @@ const ImageBox = styled.div`
   }
 
   @media (min-width: 768px) {
-    width: 496px;
-    height: 334px;
+    flex-shrink: 0;
+    width: 400px;
+    height: 252px;
     border-width: 3px;
     border-radius: 60px;
     margin: 46px 46px 0 0;
   }
 `;
 
-export default function QuizCard({ quiz, index, currentIndex, state, onAnswer, onNext, isCorrect }: Props) {
+export default function QuizCard({
+  quiz,
+  index,
+  currentIndex,
+  state,
+  onAnswer,
+  onNext,
+  isCorrect,
+}: Props) {
   const diff = index - currentIndex;
 
   return (
     <Wrapper diff={diff}>
-      <QBadge answered={state === 'result'} correct={isCorrect}>
-        <BadgeText>{state === 'result' ? (isCorrect ? 'O' : 'X') : 'Q'}</BadgeText>
+      <QBadge answered={state === "result"} correct={isCorrect}>
+        <BadgeText>
+          {state === "result" ? (isCorrect ? "O" : "X") : "Q"}
+        </BadgeText>
       </QBadge>
 
       <CardBody>
-        <QuestionText>{quiz.question_text}</QuestionText>
-        {quiz.question_image && (
-          <ImageBox>
-            <img src={quiz.question_image} alt="quiz" />
-          </ImageBox>
-        )}
+        <TopSection>
+          <QuestionText>{quiz.question_text}</QuestionText>
+          {quiz.question_image && (
+            <ImageBox>
+              <img src={quiz.question_image} alt="quiz" />
+            </ImageBox>
+          )}
+        </TopSection>
 
-        {state === 'question' ? (
-          <OptionBtnContainer options={quiz.options} onAnswer={onAnswer} />
-        ) : (
+        <OptionBtnContainer options={quiz.options} onAnswer={onAnswer} />
+
+        {state === "result" && (
           <ResultOverlay quiz={quiz} isCorrect={isCorrect!} onNext={onNext} />
         )}
       </CardBody>
