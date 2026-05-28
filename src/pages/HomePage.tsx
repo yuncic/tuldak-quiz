@@ -1,6 +1,31 @@
 import styled from "@emotion/styled";
 import { useNavigate } from "react-router-dom";
 
+export default function HomePage() {
+  const navigate = useNavigate();
+
+  return (
+    <BG>
+      <Card>
+        <Emoji>👵🏻</Emoji>
+        <Title>틀딱퀴즈</Title>
+        <Desc>
+          당신의 틀딱력은 얼마나 될까요?
+          <br />
+          재미있는 퀴즈를 통해 알아보세요!
+        </Desc>
+        <ButtonRow>
+          <QuizBtn onClick={() => navigate("/quiz/dental")}>
+            치아 상태
+            <br />
+            테스트
+          </QuizBtn>
+        </ButtonRow>
+      </Card>
+    </BG>
+  );
+}
+
 const BG = styled.div`
   width: 100vw;
   height: 100vh;
@@ -69,28 +94,3 @@ const QuizBtn = styled.button`
     transform: translateY(-4px);
   }
 `;
-
-export default function HomePage() {
-  const navigate = useNavigate();
-
-  return (
-    <BG>
-      <Card>
-        <Emoji>👵🏻</Emoji>
-        <Title>틀딱퀴즈</Title>
-        <Desc>
-          당신의 틀딱력은 얼마나 될까요?
-          <br />
-          재미있는 퀴즈를 통해 알아보세요!
-        </Desc>
-        <ButtonRow>
-          <QuizBtn onClick={() => navigate("/quiz/dental")}>
-            치아 상태
-            <br />
-            테스트
-          </QuizBtn>
-        </ButtonRow>
-      </Card>
-    </BG>
-  );
-}

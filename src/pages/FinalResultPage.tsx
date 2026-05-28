@@ -1,14 +1,35 @@
-import styled from '@emotion/styled';
-import { useLocation, useNavigate } from 'react-router-dom';
-import data from '../data/dentalQuizData.json';
-import type { ResultRange } from '../types';
+import styled from "@emotion/styled";
+import { useLocation, useNavigate } from "react-router-dom";
+import data from "../data/dentalQuizData.json";
+import type { ResultRange } from "../types";
 
 const ranges: ResultRange[] = data.resultRanges as ResultRange[];
+
+export default function FinalResultPage() {
+  const navigate = useNavigate();
+  const { state } = useLocation() as { state: { score: number } };
+  const score = state?.score ?? 0;
+
+  const result =
+    ranges.find((r) => score >= r.min && score <= r.max) ?? ranges[0];
+
+  return (
+    <BG>
+      <Card>
+        <Label>당신의 치아 상태는</Label>
+        <ResultType>{result.type}</ResultType>
+        <Message>{result.message}</Message>
+        <Label style={{ marginBottom: 24 }}>총점: {score}점</Label>
+        <RetryBtn onClick={() => navigate("/")}>다시 하기</RetryBtn>
+      </Card>
+    </BG>
+  );
+}
 
 const BG = styled.div`
   width: 100vw;
   height: 100vh;
-  background: #0052CC;
+  background: #0052cc;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -16,13 +37,13 @@ const BG = styled.div`
 
 const Card = styled.div`
   width: 340px;
-  background: #FCF8F5;
+  background: #fcf8f5;
   border-radius: 56px;
   padding: 48px 32px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
 
   @media (min-width: 768px) {
     width: 600px;
@@ -32,16 +53,16 @@ const Card = styled.div`
 `;
 
 const Label = styled.p`
-  font-family: 'SUIT-Regular', sans-serif;
+  font-family: "SUIT-Regular", sans-serif;
   font-size: 1rem;
   color: #888;
   margin: 0 0 8px;
 `;
 
 const ResultType = styled.h2`
-  font-family: 'SUIT-ExtraBold', sans-serif;
+  font-family: "SUIT-ExtraBold", sans-serif;
   font-size: 3rem;
-  color: #0063B2;
+  color: #0063b2;
   margin: 0 0 16px;
 
   @media (min-width: 768px) {
@@ -50,7 +71,7 @@ const ResultType = styled.h2`
 `;
 
 const Message = styled.p`
-  font-family: 'SUIT-Regular', sans-serif;
+  font-family: "SUIT-Regular", sans-serif;
   font-size: 1.1rem;
   color: #444;
   text-align: center;
@@ -60,34 +81,17 @@ const Message = styled.p`
 
 const RetryBtn = styled.button`
   padding: 16px 48px;
-  background: #0063B2;
+  background: #0063b2;
   color: white;
   border: none;
   border-radius: 40px;
-  font-family: 'SUIT-ExtraBold', sans-serif;
+  font-family: "SUIT-ExtraBold", sans-serif;
   font-size: 1.1rem;
   cursor: pointer;
   transition: all 0.2s ease;
 
-  &:hover { background: #004f90; transform: translateY(-2px); }
+  &:hover {
+    background: #004f90;
+    transform: translateY(-2px);
+  }
 `;
-
-export default function FinalResultPage() {
-  const navigate = useNavigate();
-  const { state } = useLocation() as { state: { score: number } };
-  const score = state?.score ?? 0;
-
-  const result = ranges.find(r => score >= r.min && score <= r.max) ?? ranges[0];
-
-  return (
-    <BG>
-      <Card>
-        <Label>당신의 치아 상태는</Label>
-        <ResultType>{result.type}</ResultType>
-        <Message>{result.message}</Message>
-        <Label style={{ marginBottom: 24 }}>총점: {score}점</Label>
-        <RetryBtn onClick={() => navigate('/')}>다시 하기</RetryBtn>
-      </Card>
-    </BG>
-  );
-}

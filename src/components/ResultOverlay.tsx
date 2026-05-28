@@ -1,10 +1,42 @@
 import styled from "@emotion/styled";
 import type { Quiz } from "../types";
 
+const AGE_KEYS = ["10대", "20대", "30대", "40대"];
+
 interface Props {
   quiz: Quiz;
   isCorrect: boolean;
   onNext: () => void;
+}
+
+export default function ResultOverlay({ quiz, onNext }: Props) {
+  const maxRate = Math.max(...Object.values(quiz.rates));
+
+  return (
+    <Overlay>
+      <AnswerBox>{quiz.custom_message}</AnswerBox>
+
+      <RateContainer>
+        <RateLabel>정답률</RateLabel>
+        {AGE_KEYS.map((age) => (
+          <RateValue key={age} isHighest={quiz.rates[age] === maxRate}>
+            {age}: {quiz.rates[age]}%
+          </RateValue>
+        ))}
+      </RateContainer>
+
+      <NextBtn onClick={onNext}>
+        <svg viewBox="0 0 45 39" fill="none">
+          <path
+            d="M22.5 2 L2 37 L43 37 Z"
+            fill="#F3F5FF"
+            stroke="#0063B2"
+            strokeWidth="3"
+          />
+        </svg>
+      </NextBtn>
+    </Overlay>
+  );
 }
 
 const Overlay = styled.div`
@@ -136,35 +168,3 @@ const NextBtn = styled.button`
     }
   }
 `;
-
-const AGE_KEYS = ["10대", "20대", "30대", "40대"] as const;
-
-export default function ResultOverlay({ quiz, onNext }: Props) {
-  const maxRate = Math.max(...Object.values(quiz.rates));
-
-  return (
-    <Overlay>
-      <AnswerBox>{quiz.custom_message}</AnswerBox>
-
-      <RateContainer>
-        <RateLabel>정답률</RateLabel>
-        {AGE_KEYS.map((age) => (
-          <RateValue key={age} isHighest={quiz.rates[age] === maxRate}>
-            {age}: {quiz.rates[age]}%
-          </RateValue>
-        ))}
-      </RateContainer>
-
-      <NextBtn onClick={onNext}>
-        <svg viewBox="0 0 45 39" fill="none">
-          <path
-            d="M22.5 2 L2 37 L43 37 Z"
-            fill="#F3F5FF"
-            stroke="#0063B2"
-            strokeWidth="3"
-          />
-        </svg>
-      </NextBtn>
-    </Overlay>
-  );
-}

@@ -1,9 +1,21 @@
-import styled from '@emotion/styled';
-import OptionBtn from './OptionBtn';
+import styled from "@emotion/styled";
+import OptionBtn from "./OptionBtn";
 
 interface Props {
   options: string[];
   onAnswer: (choice: number) => void;
+}
+
+export default function OptionBtnContainer({ options, onAnswer }: Props) {
+  return (
+    <Grid>
+      {options.map((opt, i) => (
+        <OptionBtn key={i} pos={i} onClick={() => onAnswer(i + 1)}>
+          {opt}
+        </OptionBtn>
+      ))}
+    </Grid>
+  );
 }
 
 const Grid = styled.div`
@@ -18,15 +30,3 @@ const Grid = styled.div`
     margin: 0 46px 46px;
   }
 `;
-
-export default function OptionBtnContainer({ options, onAnswer }: Props) {
-  return (
-    <Grid>
-      {options.map((opt, i) => (
-        <OptionBtn key={i} pos={i} onClick={() => onAnswer(i + 1)}>
-          {opt}
-        </OptionBtn>
-      ))}
-    </Grid>
-  );
-}

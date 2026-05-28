@@ -26,6 +26,45 @@ const getOpacity = (diff: number) => {
   return 0;
 };
 
+export default function QuizCard({
+  quiz,
+  index,
+  currentIndex,
+  state,
+  onAnswer,
+  onNext,
+  isCorrect,
+}: Props) {
+  const diff = index - currentIndex;
+
+  return (
+    <Wrapper diff={diff}>
+      <QBadge answered={state === "result"} correct={isCorrect}>
+        <BadgeText>
+          {state === "result" ? (isCorrect ? "O" : "X") : "Q"}
+        </BadgeText>
+      </QBadge>
+
+      <CardBody>
+        <TopSection>
+          <QuestionText>{quiz.question_text}</QuestionText>
+          {quiz.question_image && (
+            <ImageBox>
+              <img src={quiz.question_image} alt="quiz" />
+            </ImageBox>
+          )}
+        </TopSection>
+
+        <OptionBtnContainer options={quiz.options} onAnswer={onAnswer} />
+
+        {state === "result" && (
+          <ResultOverlay quiz={quiz} isCorrect={isCorrect!} onNext={onNext} />
+        )}
+      </CardBody>
+    </Wrapper>
+  );
+}
+
 const Wrapper = styled.div<{ diff: number }>`
   position: absolute;
   left: 50%;
@@ -153,42 +192,3 @@ const ImageBox = styled.div`
     margin: 46px 46px 0 0;
   }
 `;
-
-export default function QuizCard({
-  quiz,
-  index,
-  currentIndex,
-  state,
-  onAnswer,
-  onNext,
-  isCorrect,
-}: Props) {
-  const diff = index - currentIndex;
-
-  return (
-    <Wrapper diff={diff}>
-      <QBadge answered={state === "result"} correct={isCorrect}>
-        <BadgeText>
-          {state === "result" ? (isCorrect ? "O" : "X") : "Q"}
-        </BadgeText>
-      </QBadge>
-
-      <CardBody>
-        <TopSection>
-          <QuestionText>{quiz.question_text}</QuestionText>
-          {quiz.question_image && (
-            <ImageBox>
-              <img src={quiz.question_image} alt="quiz" />
-            </ImageBox>
-          )}
-        </TopSection>
-
-        <OptionBtnContainer options={quiz.options} onAnswer={onAnswer} />
-
-        {state === "result" && (
-          <ResultOverlay quiz={quiz} isCorrect={isCorrect!} onNext={onNext} />
-        )}
-      </CardBody>
-    </Wrapper>
-  );
-}
