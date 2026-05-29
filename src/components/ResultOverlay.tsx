@@ -18,11 +18,13 @@ export default function ResultOverlay({ quiz, onNext }: Props) {
 
       <RateContainer>
         <RateLabel>정답률</RateLabel>
-        {AGE_KEYS.map((age) => (
-          <RateValue key={age} isHighest={quiz.rates[age] === maxRate}>
-            {age}: {quiz.rates[age]}%
-          </RateValue>
-        ))}
+        <RateValueContainer>
+          {AGE_KEYS.map((age) => (
+            <RateValue key={age} isHighest={quiz.rates[age] === maxRate}>
+              {age}: {quiz.rates[age]}%
+            </RateValue>
+          ))}
+        </RateValueContainer>
       </RateContainer>
 
       <NextBtn onClick={onNext}>
@@ -56,15 +58,18 @@ const Overlay = styled.div`
 
 const AnswerBox = styled.div`
   width: calc(100% - 40px);
-  margin: 40px 20px 0;
+  margin: 60px 20px 40px;
+  margin-bottom: 0px;
   font-family: "SUIT-ExtraBold", sans-serif;
   color: #0063b2;
   font-size: 18px;
   line-height: 28px;
   text-align: center;
-  padding: 24px 0;
-  border-top: 2px solid #0063b2;
-  border-bottom: 2px solid #0063b2;
+  padding: 24px 10px;
+  /* border-top: 2px solid #0063b2;
+  border-bottom: 2px solid #0063b2; */
+  border: 2px solid #0063b2;
+  border-radius: 10px;
 
   @media (min-width: 768px) {
     width: calc(100% - 132px);
@@ -81,14 +86,17 @@ const AnswerBox = styled.div`
 `;
 
 const RateContainer = styled.div`
+  display: flex;
+  flex-direction: column;
   width: calc(100% - 40px);
   margin: 0 20px;
   padding: 12px 0;
-  border-bottom: 2px solid #0063b2;
+  border-bottom: 1px solid #0063b2;
   display: flex;
   flex-wrap: wrap;
   gap: 8px 16px;
   justify-content: center;
+  align-items: center;
 
   @media (min-width: 768px) {
     width: calc(100% - 132px);
@@ -104,22 +112,28 @@ const RateContainer = styled.div`
 
 const RateLabel = styled.span`
   font-family: "SUIT-ExtraBold", sans-serif;
-  font-size: 30px;
+  font-size: 20px;
   color: #0063b2;
-  margin-right: 8px;
+  margin-top: 0px;
+  margin-bottom: 20px;
 
   @media (min-width: 768px) {
     font-size: 20px;
     margin-right: 80px;
   }
 `;
-
+const RateValueContainer = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+`;
 const RateValue = styled.span<{ isHighest: boolean }>`
   font-family:
     ${({ isHighest }) => (isHighest ? "'SUIT-ExtraBold'" : "'SUIT-Regular'")},
     sans-serif;
   font-size: 15px;
   color: #0063b2;
+  box-sizing: border-box;
 
   @media (min-width: 768px) {
     font-size: 18px;
