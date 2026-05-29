@@ -152,6 +152,8 @@ const RateValue = styled.span<{ isHighest: boolean }>`
 `;
 
 const NextBtn = styled.button`
+  position: absolute;
+  bottom: 50px;
   width: 180px;
   height: 64px;
   background: #f3f5ff;
