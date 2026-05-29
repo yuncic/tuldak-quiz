@@ -39,27 +39,36 @@ export default function QuizCard({
 
   return (
     <Wrapper diff={diff}>
-      <QBadge answered={state === "result"} correct={isCorrect}>
-        <BadgeText>
-          {state === "result" ? (isCorrect ? "O" : "X") : "Q"}
-        </BadgeText>
-      </QBadge>
-
       <CardBody>
-        <TopSection>
-          <QuestionText>{quiz.question_text}</QuestionText>
-          {quiz.question_image && (
-            <ImageBox>
-              <img src={quiz.question_image} alt="quiz" />
-            </ImageBox>
+        <QBadge>
+          <img
+            src={
+              state !== "result"
+                ? "/YQ_mark.png"
+                : isCorrect
+                  ? "/O_mark.png"
+                  : "/X_mark.png"
+            }
+            alt={state !== "result" ? "Q" : isCorrect ? "O" : "X"}
+          />
+        </QBadge>
+
+        <CardInner>
+          <TopSection>
+            <QuestionText>{quiz.question_text}</QuestionText>
+            {quiz.question_image && (
+              <ImageBox>
+                <img src={quiz.question_image} alt="quiz" />
+              </ImageBox>
+            )}
+          </TopSection>
+
+          <OptionBtnContainer options={quiz.options} onAnswer={onAnswer} />
+
+          {state === "result" && (
+            <ResultOverlay quiz={quiz} isCorrect={isCorrect!} onNext={onNext} />
           )}
-        </TopSection>
-
-        <OptionBtnContainer options={quiz.options} onAnswer={onAnswer} />
-
-        {state === "result" && (
-          <ResultOverlay quiz={quiz} isCorrect={isCorrect!} onNext={onNext} />
-        )}
+        </CardInner>
       </CardBody>
     </Wrapper>
   );
@@ -81,6 +90,10 @@ const Wrapper = styled.div<{ diff: number }>`
 `;
 
 const CardBody = styled.div`
+  position: relative;
+`;
+
+const CardInner = styled.div`
   background: #fcf8f5;
   border-radius: 56px 56px 28px 28px;
   overflow: hidden;
@@ -112,37 +125,25 @@ const TopSection = styled.div`
   }
 `;
 
-const QBadge = styled.div<{ answered: boolean; correct: boolean | null }>`
+const QBadge = styled.div`
   position: absolute;
-  top: -34px;
-  left: -34px;
+  top: -20px;
+  left: -18px;
   width: 72px;
   height: 72px;
-  border-radius: 50%;
-  background: ${({ answered, correct }) =>
-    !answered ? "#FFD600" : correct ? "#FFD600" : "#FF4E00"};
-  display: flex;
-  align-items: center;
-  justify-content: center;
   z-index: 11;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
 
   @media (min-width: 768px) {
     width: 108px;
     height: 108px;
     top: -34px;
     left: -34px;
-  }
-`;
-
-const BadgeText = styled.span`
-  color: white;
-  font-size: 28px;
-  font-weight: 900;
-  font-family: "SUIT-ExtraBold", sans-serif;
-
-  @media (min-width: 768px) {
-    font-size: 44px;
   }
 `;
 

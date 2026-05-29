@@ -1,12 +1,12 @@
-import styled from '@emotion/styled';
+import styled from "@emotion/styled";
 
 const OptionBtn = styled.button<{ pos: number }>`
-  width: 178px;
+  width: 100%;
   height: 83px;
-  background: #2A90EF;
-  border: 1px solid #0063B2;
-  color: #FCF6F5;
-  font-family: 'SUIT-ExtraBold', sans-serif;
+  background: #2a90ef;
+  border: 1px solid #0063b2;
+  color: #fcf6f5;
+  font-family: "SUIT-ExtraBold", sans-serif;
   font-size: 20px;
   line-height: 32px;
   text-align: center;
@@ -18,24 +18,30 @@ const OptionBtn = styled.button<{ pos: number }>`
   justify-content: center;
 
   border-radius: ${({ pos }) =>
-    pos === 2 ? '0 0 0 28px' :
-    pos === 3 ? '0 0 28px 0' :
-    '0'};
+    pos === 2 ? "0 0 0 28px" : pos === 3 ? "0 0 28px 0" : "0"};
 
-  &:hover { background: #1a78d4; }
-  &:active { background: #0f5fa8; }
+  &:hover {
+    background: #1a78d4;
+  }
+  &:active {
+    background: #0f5fa8;
+  }
 
   @media (min-width: 768px) {
     width: 100%;
     height: 82px;
-    background: #F3F5FF;
+    background: #f3f5ff;
     border-radius: 46px;
-    color: #0063B2;
+    color: #0063b2;
     font-size: 34px;
-    border: 1px solid #0063B2;
+    border: 1px solid #0063b2;
 
-    &:hover { background: #DCE5FF; }
-    &:active { background: #AFC5FF; }
+    &:hover {
+      background: #dce5ff;
+    }
+    &:active {
+      background: #afc5ff;
+    }
   }
 `;
 

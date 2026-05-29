@@ -21,7 +21,7 @@ export default function OptionBtnContainer({ options, onAnswer }: Props) {
 const Grid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  width: 358px;
+  width: 100%;
   margin-top: auto;
 
   @media (min-width: 768px) {
