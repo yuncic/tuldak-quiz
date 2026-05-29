@@ -68,7 +68,7 @@ const AnswerBox = styled.div`
   padding: 24px 10px;
   /* border-top: 2px solid #0063b2;
   border-bottom: 2px solid #0063b2; */
-  border: 2px solid #0063b2;
+  border: 1.5px solid #0063b2;
   border-radius: 10px;
 
   @media (min-width: 768px) {
@@ -81,7 +81,11 @@ const AnswerBox = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    border-width: 3px;
+    border-left: none;
+    border-right: none;
+    border-radius: 20px;
+    border: solid 2px;
+    margin-bottom: 20px;
   }
 `;
 
@@ -101,12 +105,13 @@ const RateContainer = styled.div`
   @media (min-width: 768px) {
     width: calc(100% - 132px);
     margin: 0 66px;
+    flex-direction: row;
     flex-wrap: nowrap;
     justify-content: flex-start;
     align-items: center;
     height: 58px;
     padding: 0;
-    border-width: 3px;
+    border-width: 1.5px;
   }
 `;
 
@@ -120,12 +125,17 @@ const RateLabel = styled.span`
   @media (min-width: 768px) {
     font-size: 20px;
     margin-right: 80px;
+    margin-bottom: 0;
   }
 `;
 const RateValueContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 20px;
+
+  @media (min-width: 768px) {
+    display: contents;
+  }
 `;
 const RateValue = styled.span<{ isHighest: boolean }>`
   font-family:
