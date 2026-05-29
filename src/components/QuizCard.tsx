@@ -77,7 +77,7 @@ export default function QuizCard({
 const Wrapper = styled.div<{ diff: number }>`
   position: absolute;
   left: 50%;
-  width: 358px;
+  width: 335px;
   transition: all 0.5s ease;
   transform: ${({ diff }) => getOffset(diff)};
   opacity: ${({ diff }) => getOpacity(diff)};
