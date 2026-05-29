@@ -29,7 +29,7 @@ export default function HomePage() {
 const BG = styled.div`
   width: 100vw;
   height: 100vh;
-  background: #0052cc url("/Frame2.png") center/cover no-repeat;
+  background-image: url("/Frame2.png");
   display: flex;
   align-items: center;
   justify-content: center;
