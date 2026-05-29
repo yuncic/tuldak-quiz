@@ -5,16 +5,18 @@
 기존 정적 JSON 데이터(`dentalQuizData.json`)를 Supabase DB로 이전하고,
 관리자가 퀴즈를 관리할 수 있는 어드민 페이지를 추가한다.
 
+SNS 공유를 쉽게 할 수 있게 한다. (카카오톡, 인스타그램, X, 링크공유)
+
 ---
 
 ## 기술 스택 추가
 
-| 항목 | 기술 |
-|---|---|
-| DB | Supabase PostgreSQL |
-| Storage | Supabase Storage |
-| Auth | Supabase Auth (이메일/비밀번호) |
-| SDK | @supabase/supabase-js |
+| 항목    | 기술                            |
+| ------- | ------------------------------- |
+| DB      | Supabase PostgreSQL             |
+| Storage | Supabase Storage                |
+| Auth    | Supabase Auth (이메일/비밀번호) |
+| SDK     | @supabase/supabase-js           |
 
 ---
 
@@ -22,10 +24,10 @@
 
 ### 1. 관리자 인증
 
-| 기능 | 설명 |
-|---|---|
-| 로그인 | 이메일/비밀번호로 로그인 |
-| 로그아웃 | 세션 종료 |
+| 기능        | 설명                                                             |
+| ----------- | ---------------------------------------------------------------- |
+| 로그인      | 이메일/비밀번호로 로그인                                         |
+| 로그아웃    | 세션 종료                                                        |
 | 라우트 보호 | 비로그인 상태에서 `/admin` 접근 시 `/admin/login`으로 리다이렉트 |
 
 - 관리자 계정은 Supabase Auth에 단일 계정으로 등록
@@ -45,15 +47,15 @@
 
 입력 항목:
 
-| 필드 | 타입 | 필수 | 설명 |
-|---|---|---|---|
-| `question_text` | string | ✓ | 문제 텍스트 |
-| `question_image` | file | | 이미지 업로드 (Supabase Storage) |
-| `options` | string[4] | ✓ | 선택지 4개 |
-| `correct_answer` | number (1~4) | ✓ | 정답 번호 |
-| `custom_message` | string | ✓ | 정답 해설 |
-| `rates` | object | ✓ | 연령대별 정답률 (10대/20대/30대/40대) |
-| `weight` | number (1~3) | ✓ | 출제 가중치 |
+| 필드             | 타입         | 필수 | 설명                                  |
+| ---------------- | ------------ | ---- | ------------------------------------- |
+| `question_text`  | string       | ✓    | 문제 텍스트                           |
+| `question_image` | file         |      | 이미지 업로드 (Supabase Storage)      |
+| `options`        | string[4]    | ✓    | 선택지 4개                            |
+| `correct_answer` | number (1~4) | ✓    | 정답 번호                             |
+| `custom_message` | string       | ✓    | 정답 해설                             |
+| `rates`          | object       | ✓    | 연령대별 정답률 (10대/20대/30대/40대) |
+| `weight`         | number (1~3) | ✓    | 출제 가중치                           |
 
 - 이미지 업로드 시 Supabase Storage에 저장 후 public URL을 `question_image`에 저장
 - 저장 성공 시 목록으로 이동
