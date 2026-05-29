@@ -19,7 +19,7 @@ export default function FinalResultPage() {
         <Label>당신의 치아 상태는</Label>
         <ResultType>{result.type}</ResultType>
         <Message>{result.message}</Message>
-        <Label style={{ marginBottom: 24 }}>총점: {score}점</Label>
+        {/* <Label style={{ marginBottom: 24 }}>총점: {score}점</Label> */}
         <RetryBtn onClick={() => navigate("/")}>다시 하기</RetryBtn>
       </Card>
     </BG>
